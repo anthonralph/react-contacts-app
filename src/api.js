@@ -1,0 +1,1 @@
+export const apiLink = "https://crudcrud.com/api/6b98e884ace04d348e454f68695c2a7f/contacts"

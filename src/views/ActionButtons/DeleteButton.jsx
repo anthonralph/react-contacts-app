@@ -1,10 +1,11 @@
 import IconButton from "../../components/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { apiLink } from "../../api";
 
 const DeleteButton = ({ contactId }) => {
   const handleDelete = async () => {
     try {
-      const apiUrl = `/api/${contactId}`;
+      const apiUrl = `${apiLink}/${contactId}`;
       const response = await fetch(apiUrl, {
         method: "DELETE",
       });

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TextField from "../../components/TextField";
 import AddButton from "../../components/AddButton";
 import Grid from "@mui/material/Grid";
+import { apiLink } from "../../api";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -55,7 +56,7 @@ const ContactForm = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("/api", {
+      const response = await fetch(apiLink, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,14 +1,14 @@
 import ContactCard from "../../components/ContactCard";
 import { useState } from "react";
 import { useEffect } from "react";
+import { apiLink } from "../../api";
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
 
-  const apiUrl = "/api";
   const fetchData = async () => {
     try {
-      const response = await fetch(apiUrl);
+      const response = await fetch(apiLink);
       if (!response.ok) {
         throw new Error(response);
       }
