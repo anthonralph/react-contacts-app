@@ -55,16 +55,13 @@ const ContactForm = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(
-        "https://crudcrud.com/api/fbc255a7b24945e5bbeddf4623f4ee1a/contacts",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch("/api", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
       console.log(response);
       if (response.ok) {
         console.log("Contact created successfully");

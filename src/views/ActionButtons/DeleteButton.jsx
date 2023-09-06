@@ -4,7 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 const DeleteButton = ({ contactId }) => {
   const handleDelete = async () => {
     try {
-      const apiUrl = `https://crudcrud.com/api/7c7374bcc3c24a2087036860c9c177cc/contacts/${contactId}`;
+      const apiUrl = `/api/${contactId}`;
       const response = await fetch(apiUrl, {
         method: "DELETE",
       });

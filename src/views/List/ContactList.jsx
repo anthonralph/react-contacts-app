@@ -5,8 +5,7 @@ import { useEffect } from "react";
 const App = () => {
   const [contacts, setContacts] = useState([]);
 
-  const apiUrl =
-    "https://crudcrud.com/api/7c7374bcc3c24a2087036860c9c177cc/contacts";
+  const apiUrl = "/api";
   const fetchData = async () => {
     try {
       const response = await fetch(apiUrl);
