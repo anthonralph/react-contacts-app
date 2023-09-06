@@ -3,6 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import DeleteButton from "../views/ActionButtons/DeleteButton";
+import EditButton from "../views/ActionButtons/EditButton";
 
 const ContactCard = ({ contact }) => {
   return (
@@ -22,6 +23,7 @@ const ContactCard = ({ contact }) => {
           </Grid>
           <Grid item xs={1}>
             <DeleteButton contactId={contact._id}></DeleteButton>
+            <EditButton contactId={contact._id}></EditButton>
           </Grid>
         </Grid>
       </CardContent>
