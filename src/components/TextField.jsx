@@ -1,16 +1,17 @@
 import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
 const CustomTextField = (props) => {
-  const helperText = "Please enter your " + props.formLabel.toLowerCase();
   return (
     <>
-      <p>{props.formLabel}</p>
+      <Typography variant="body2" color="textSecondary">
+        {props.formlabel}
+      </Typography>
       <TextField
         hiddenLabel
         variant="filled"
         size="small"
         className="rounded-textfield"
-        helperText={helperText}
         InputProps={{
           disableUnderline: true,
         }}
