@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import TextField from "../TextField";
-import AddButton from "../AddButton";
+import TextField from "../../components/TextField";
+import AddButton from "../../components/AddButton";
 import Grid from "@mui/material/Grid";
 
 const ContactForm = () => {
