@@ -8,6 +8,11 @@ const AddButton = () => {
       color="primary"
       startIcon={<AddIcon />}
       type="submit"
+      size="small" // Set the size to 'small'
+      sx={{
+        borderRadius: "20px",
+        align: "left",
+      }}
     >
       Add
     </Button>
