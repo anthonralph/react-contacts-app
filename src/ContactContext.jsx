@@ -28,7 +28,9 @@ export const ContactProvider = ({ children }) => {
   const [state, dispatch] = useReducer(contactReducer, initialState);
 
   const fetchData = async () => {
+    dispatch({ type: "SET_LOADING", payload: true });
     const contactsData = await fetchContacts();
+    dispatch({ type: "SET_LOADING", payload: false });
     dispatch({ type: "SET_CONTACTS", payload: contactsData });
   };
 
