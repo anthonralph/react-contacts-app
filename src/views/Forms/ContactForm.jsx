@@ -38,18 +38,14 @@ const ContactForm = (contact) => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validateForm()) {
-      return;
-    }
-    setLoading(true);
-    const formData = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      mobileNumber: mobileNumber,
-    };
+  const formData = {
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    mobileNumber: mobileNumber,
+  };
+
+  const addContact = async () => {
     try {
       const response = await fetch(apiLink, {
         method: "POST",
@@ -65,9 +61,39 @@ const ContactForm = (contact) => {
       }
     } catch (error) {
       console.error("Error creating contact:", error);
-    } finally {
-      setLoading(false);
     }
+  };
+
+  const editContact = async () => {
+    try {
+      console.log(formData);
+      const response = await fetch(`${apiLink}/${currentData._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+    setLoading(true);
+    if (contact) {
+      await editContact();
+    } else {
+      await addContact();
+    }
+    setLoading(false);
   };
 
   return (
