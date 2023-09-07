@@ -16,7 +16,6 @@ const ContactForm = (contact) => {
     currentData?.mobileNumber || ""
   );
 
-  const [loading, setLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
 
   const validateForm = () => {
@@ -52,17 +51,18 @@ const ContactForm = (contact) => {
       email: email,
       mobileNumber: mobileNumber,
     };
-    setLoading(true);
     const isToUpdate = Object.keys(currentData).length !== 0;
     if (isToUpdate) {
-      await editContact();
+      dispatch({ type: "SET_LOADING" });
       await updateContact(formData, currentData._id);
+      dispatch({ type: "SET_EDIT", payload: "" });
     } else {
       await addContact(formData);
     }
     const newContacts = await fetchContacts();
+
     dispatch({ type: "SET_CONTACTS", payload: newContacts });
-    setLoading(false);
+
     setFirstName("");
     setLastName("");
     setEmail("");

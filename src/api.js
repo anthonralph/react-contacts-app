@@ -39,7 +39,6 @@ export const deleteContact = async (contactId) => {
     const response = await fetch(apiUrl, {
       method: "DELETE",
     });
-    await fetchData();
     if (!response.ok) {
       throw new Error("Failed to delete contact");
     }

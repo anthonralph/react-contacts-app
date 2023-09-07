@@ -7,16 +7,22 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ContactForm from "../views/Forms/ContactForm";
 import { useState } from "react";
+import { useContacts } from "../ContactContext";
 
 const ContactCard = ({ contact, onDelete }) => {
+  const { dispatch, state } = useContacts();
+
   const [editing, setEditing] = useState(false);
+
+  const editingId = state.editingId;
+
   return (
     <>
       <Card
         sx={{ marginY: "20px", maxWidth: 400, padding: "20px" }}
         variant="outlined"
       >
-        {editing ? (
+        {editingId == contact._id ? (
           <div>
             <h4>Edit Contact</h4>
             <ContactForm contact={contact} />
@@ -36,7 +42,12 @@ const ContactCard = ({ contact, onDelete }) => {
                 </Typography>
               </Grid>
               <Grid item md={3}>
-                <IconButton onClick={() => setEditing(true)} color="info">
+                <IconButton
+                  onClick={() =>
+                    dispatch({ type: "SET_EDIT", payload: contact._id })
+                  }
+                  color="info"
+                >
                   <EditIcon />
                 </IconButton>
                 <IconButton onClick={onDelete} color="error">

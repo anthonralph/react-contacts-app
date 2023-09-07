@@ -5,7 +5,7 @@ const ContactContext = createContext();
 
 const initialState = {
   contacts: [],
-  isLoading: false,
+  isLoading: true,
   editingId: "",
 };
 
@@ -13,11 +13,19 @@ const contactReducer = (state, action) => {
   switch (action.type) {
     case "SET_CONTACTS":
       return {
+        ...state,
         contacts: action.payload,
+        isLoading: false,
       };
     case "SET_LOADING":
       return {
-        isLoading: action.payload,
+        ...state,
+        isLoading: true,
+      };
+    case "SET_EDIT":
+      return {
+        ...state,
+        editingId: action.payload,
       };
     default:
       return state;
@@ -28,9 +36,7 @@ export const ContactProvider = ({ children }) => {
   const [state, dispatch] = useReducer(contactReducer, initialState);
 
   const fetchData = async () => {
-    dispatch({ type: "SET_LOADING", payload: true });
     const contactsData = await fetchContacts();
-    dispatch({ type: "SET_LOADING", payload: false });
     dispatch({ type: "SET_CONTACTS", payload: contactsData });
   };
 
