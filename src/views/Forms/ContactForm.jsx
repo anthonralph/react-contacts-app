@@ -41,35 +41,17 @@ const ContactForm = (contact) => {
     return Object.keys(errors).length === 0;
   };
 
-  const formData = {
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
-    mobileNumber: mobileNumber,
-  };
-
-  const editContact = async () => {
-    try {
-      const response = await fetch(`${apiLink}/${currentData._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) {
       return;
     }
+    const formData = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      mobileNumber: mobileNumber,
+    };
     setLoading(true);
     const isToUpdate = Object.keys(currentData).length !== 0;
     if (isToUpdate) {
