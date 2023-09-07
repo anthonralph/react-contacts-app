@@ -29,8 +29,6 @@ const App = () => {
       const response = await fetch(apiUrl, {
         method: "DELETE",
       });
-      console.log(contactId);
-      console.log("excecuted");
       await fetchData();
       if (!response.ok) {
         throw new Error("Failed to delete contact");

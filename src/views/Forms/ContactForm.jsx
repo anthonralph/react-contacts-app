@@ -1,46 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "../../components/TextField";
 import AddButton from "../../components/AddButton";
 import Grid from "@mui/material/Grid";
 import { apiLink } from "../../api";
 
-const ContactForm = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    mobileNumber: "",
-  });
+const ContactForm = (contact) => {
+  const currentData = contact?.contact || {};
+  const [firstName, setFirstName] = useState(currentData?.firstName || "");
+  const [lastName, setLastName] = useState(currentData?.lastName || "");
+  const [email, setEmail] = useState(currentData?.email || "");
+  const [mobileNumber, setMobileNumber] = useState(
+    currentData?.mobileNumber || ""
+  );
 
   const [loading, setLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
   const validateForm = () => {
     const errors = {};
-    if (!formData.firstName.trim()) {
+    if (!firstName.trim()) {
       errors.firstName = "First Name is required";
     }
-    if (!formData.lastName.trim()) {
+    if (!lastName.trim()) {
       errors.lastName = "Last Name is required";
     }
-    if (!formData.email.trim()) {
+    if (!email.trim()) {
       errors.email = "Email is required";
-    } else if (
-      !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(formData.email)
-    ) {
+    } else if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
       errors.email = "Invalid email format";
     }
-    if (!formData.mobileNumber.trim()) {
+    if (!mobileNumber.trim()) {
       errors.mobileNumber = "Mobile Number is required";
-    } else if (!/^09\d{9}$/.test(formData.mobileNumber)) {
+    } else if (!/^09\d{9}$/.test(mobileNumber)) {
       errors.mobileNumber = 'Mobile Number must start with "09"';
     }
     setValidationErrors(errors);
@@ -52,9 +43,13 @@ const ContactForm = () => {
     if (!validateForm()) {
       return;
     }
-
     setLoading(true);
-
+    const formData = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      mobileNumber: mobileNumber,
+    };
     try {
       const response = await fetch(apiLink, {
         method: "POST",
@@ -63,20 +58,12 @@ const ContactForm = () => {
         },
         body: JSON.stringify(formData),
       });
-      console.log(response);
       if (response.ok) {
         console.log("Contact created successfully");
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          mobileNumber: "",
-        });
       } else {
         console.error("Error creating contact:", response.statusText);
       }
     } catch (error) {
-      // Handle any network or other errors
       console.error("Error creating contact:", error);
     } finally {
       setLoading(false);
@@ -90,8 +77,10 @@ const ContactForm = () => {
           <TextField
             name="firstName"
             formlabel="First Name"
-            value={formData.firstName}
-            onChange={handleChange}
+            value={firstName}
+            onChange={(e) => {
+              setFirstName(e.target.value.trim());
+            }}
             error={!!validationErrors.firstName}
             helperText={validationErrors.firstName}
           />
@@ -100,8 +89,10 @@ const ContactForm = () => {
           <TextField
             name="lastName"
             formlabel="Last Name"
-            value={formData.lastName}
-            onChange={handleChange}
+            value={lastName}
+            onChange={(e) => {
+              setLastName(e.target.value.trim());
+            }}
             error={!!validationErrors.lastName}
             helperText={validationErrors.lastName}
           />
@@ -110,8 +101,10 @@ const ContactForm = () => {
           <TextField
             name="email"
             formlabel="Email"
-            value={formData.email}
-            onChange={handleChange}
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value.trim());
+            }}
             error={!!validationErrors.email}
             helperText={validationErrors.email}
           />
@@ -120,8 +113,10 @@ const ContactForm = () => {
           <TextField
             name="mobileNumber"
             formlabel="Mobile Number"
-            value={formData.mobileNumber}
-            onChange={handleChange}
+            value={mobileNumber}
+            onChange={(e) => {
+              setMobileNumber(e.target.value.trim());
+            }}
             error={!!validationErrors.mobileNumber}
             helperText={validationErrors.mobileNumber}
           />
