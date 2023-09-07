@@ -23,8 +23,8 @@ const ContactCard = ({ contact, onDelete }) => {
           </div>
         ) : (
           <CardContent sx={{ textAlign: "left" }}>
-            <Grid container spacing={2}>
-              <Grid item xs={9}>
+            <Grid container spacing={1}>
+              <Grid item md={9}>
                 <Typography variant="h5">
                   {contact.firstName} {contact.lastName}
                 </Typography>
@@ -35,7 +35,7 @@ const ContactCard = ({ contact, onDelete }) => {
                   Mobile Number: {contact.mobileNumber}
                 </Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item md={3}>
                 <IconButton onClick={() => setEditing(true)} color="info">
                   <EditIcon />
                 </IconButton>

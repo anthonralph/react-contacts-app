@@ -72,8 +72,8 @@ const ContactForm = (contact) => {
 
   return (
     <form onSubmit={handleSubmit} style={{ display: "flex" }}>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
+      <Grid container spacing={1} sx={{ textAlign: "center" }}>
+        <Grid item xs={12} md={6}>
           <TextField
             name="firstName"
             formlabel="First Name"
@@ -85,7 +85,7 @@ const ContactForm = (contact) => {
             helperText={validationErrors.firstName}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <TextField
             name="lastName"
             formlabel="Last Name"
@@ -97,7 +97,7 @@ const ContactForm = (contact) => {
             helperText={validationErrors.lastName}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <TextField
             name="email"
             formlabel="Email"
@@ -109,7 +109,7 @@ const ContactForm = (contact) => {
             helperText={validationErrors.email}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <TextField
             name="mobileNumber"
             formlabel="Mobile Number"
@@ -122,7 +122,7 @@ const ContactForm = (contact) => {
           />
         </Grid>
         <Grid item xs={12}>
-          <AddButton type="submit" disabled={loading} />
+          <AddButton type="submit" />
         </Grid>
       </Grid>
     </form>

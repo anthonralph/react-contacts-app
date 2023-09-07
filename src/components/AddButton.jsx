@@ -1,20 +1,20 @@
 import Button from "@mui/material/Button";
-import AddIcon from "@mui/icons-material/Add";
+import SaveIcon from "@mui/icons-material/Save";
 
 const AddButton = () => {
   return (
     <Button
       variant="contained"
       color="primary"
-      startIcon={<AddIcon />}
+      startIcon={<SaveIcon />}
       type="submit"
       size="small"
       sx={{
         borderRadius: "20px",
-        align: "left",
+        margin: "10px",
       }}
     >
-      Add
+      Save
     </Button>
   );
 };
