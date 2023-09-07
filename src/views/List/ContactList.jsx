@@ -23,10 +23,31 @@ const App = () => {
     fetchData();
   }, []);
 
+  const deleteContact = async (contactId) => {
+    try {
+      const apiUrl = `${apiLink}/${contactId}`;
+      const response = await fetch(apiUrl, {
+        method: "DELETE",
+      });
+      console.log(contactId);
+      console.log("excecuted");
+      await fetchData();
+      if (!response.ok) {
+        throw new Error("Failed to delete contact");
+      }
+    } catch (error) {
+      console.error("Error deleting contact:", error);
+    }
+  };
+
   return (
     <div>
       {contacts.map((contact, index) => (
-        <ContactCard contact={contact} key={index} />
+        <ContactCard
+          contact={contact}
+          key={index}
+          onDelete={() => deleteContact(contact._id)}
+        />
       ))}
     </div>
   );

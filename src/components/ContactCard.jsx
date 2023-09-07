@@ -2,10 +2,11 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import DeleteButton from "../views/ActionButtons/DeleteButton";
-import EditButton from "../views/ActionButtons/EditButton";
+import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
-const ContactCard = ({ contact }) => {
+const ContactCard = ({ contact, onDelete, onEdit }) => {
   return (
     <Card sx={{ marginY: "20px" }} variant="outlined">
       <CardContent sx={{ textAlign: "left" }}>
@@ -21,9 +22,13 @@ const ContactCard = ({ contact }) => {
               Mobile Number: {contact.mobileNumber}
             </Typography>
           </Grid>
-          <Grid item xs={1}>
-            <DeleteButton contactId={contact._id}></DeleteButton>
-            <EditButton contactId={contact._id}></EditButton>
+          <Grid item xs={3}>
+            <IconButton onClick={onEdit} color="info">
+              <EditIcon />
+            </IconButton>
+            <IconButton onClick={onDelete} color="error">
+              <DeleteIcon />
+            </IconButton>
           </Grid>
         </Grid>
       </CardContent>
