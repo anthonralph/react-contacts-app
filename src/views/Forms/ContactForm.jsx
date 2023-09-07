@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import TextField from "../../components/TextField";
 import AddButton from "../../components/AddButton";
 import Grid from "@mui/material/Grid";
-import { apiLink } from "../../api";
+import { addContact, updateContact, fetchContacts } from "../../api";
+import { useContacts } from "../../ContactContext";
 
 const ContactForm = (contact) => {
+  const { dispatch, state } = useContacts();
+
   const currentData = contact?.contact || {};
   const [firstName, setFirstName] = useState(currentData?.firstName || "");
   const [lastName, setLastName] = useState(currentData?.lastName || "");
@@ -45,28 +48,8 @@ const ContactForm = (contact) => {
     mobileNumber: mobileNumber,
   };
 
-  const addContact = async () => {
-    try {
-      const response = await fetch(apiLink, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      if (response.ok) {
-        console.log("Contact created successfully");
-      } else {
-        console.error("Error creating contact:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error creating contact:", error);
-    }
-  };
-
   const editContact = async () => {
     try {
-      console.log(formData);
       const response = await fetch(`${apiLink}/${currentData._id}`, {
         method: "PUT",
         headers: {
@@ -88,12 +71,20 @@ const ContactForm = (contact) => {
       return;
     }
     setLoading(true);
-    if (contact) {
+    const isToUpdate = Object.keys(currentData).length !== 0;
+    if (isToUpdate) {
       await editContact();
+      await updateContact(formData, currentData._id);
     } else {
-      await addContact();
+      await addContact(formData);
     }
+    const newContacts = await fetchContacts();
+    dispatch({ type: "SET_CONTACTS", payload: newContacts });
     setLoading(false);
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setMobileNumber("");
   };
 
   return (

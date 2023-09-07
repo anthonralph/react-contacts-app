@@ -1,27 +1,11 @@
 import ContactCard from "../../components/ContactCard";
-import { useState } from "react";
-import { useEffect } from "react";
 import { apiLink } from "../../api";
+import { useContacts } from "../../ContactContext";
 
-const App = () => {
-  const [contacts, setContacts] = useState([]);
+const ContactList = () => {
+  const { state, dispatch } = useContacts();
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(apiLink);
-      if (!response.ok) {
-        throw new Error(response);
-      }
-      const data = await response.json();
-      setContacts(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const contacts = state.contacts;
 
   const deleteContact = async (contactId) => {
     try {
@@ -40,7 +24,7 @@ const App = () => {
 
   return (
     <div>
-      {contacts.map((contact, index) => (
+      {contacts?.map((contact, index) => (
         <ContactCard
           contact={contact}
           key={index}
@@ -51,4 +35,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default ContactList;
