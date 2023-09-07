@@ -1,7 +1,6 @@
-import { useState } from "react";
 import "./App.css";
-import ContactForm from "./views/Forms/ContactForm";
 import Card from "@mui/material/Card";
+import ContactForm from "./views/Forms/ContactForm";
 import ContactList from "./views/List/ContactList";
 
 function App() {
