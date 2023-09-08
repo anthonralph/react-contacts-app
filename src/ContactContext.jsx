@@ -7,6 +7,11 @@ const initialState = {
   contacts: [],
   isLoading: true,
   editingId: "",
+  alert: {
+    text: "",
+    type: "", //error, warning, info, success
+    show: false,
+  },
 };
 
 const contactReducer = (state, action) => {
@@ -26,6 +31,11 @@ const contactReducer = (state, action) => {
       return {
         ...state,
         editingId: action.payload,
+      };
+    case "SET_ALERT":
+      return {
+        ...state,
+        alert: action.payload,
       };
     default:
       return state;
