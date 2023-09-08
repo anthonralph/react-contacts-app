@@ -130,7 +130,7 @@ const ContactForm = (contact) => {
           />
         </Grid>
         <Grid item xs={12}>
-          <AddButton />
+          <AddButton contactId={currentData._id} />
         </Grid>
       </Grid>
     </form>

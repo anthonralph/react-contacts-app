@@ -21,6 +21,7 @@ const contactReducer = (state, action) => {
         ...state,
         contacts: action.payload,
         isLoading: false,
+        editingId: "",
       };
     case "SET_LOADING":
       return {
