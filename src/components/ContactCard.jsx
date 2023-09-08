@@ -7,6 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ContactForm from "../views/Forms/ContactForm";
 import { useContacts } from "../ContactContext";
+import PropTypes from "prop-types";
 
 const ContactCard = ({ contact, onDelete }) => {
   const { dispatch, state } = useContacts();
@@ -61,5 +62,13 @@ const ContactCard = ({ contact, onDelete }) => {
     </>
   );
 };
+ContactCard.propTypes = {
+  contact: PropTypes.object.isRequired,
+  onDelete: PropTypes.func.isRequired,
+};
 
+ContactCard.defaultProps = {
+  contact: {},
+  onDelete: () => console.log("No event"),
+};
 export default ContactCard;
