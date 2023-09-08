@@ -2,8 +2,9 @@ import Button from "@mui/material/Button";
 import SaveIcon from "@mui/icons-material/Save";
 import { useContacts } from "../ContactContext";
 import PropTypes from "prop-types";
+import React from "react";
 
-const AddButton = ({ contactId }) => {
+const AddButton = React.memo(({ contactId }) => {
   const { state, dispatch } = useContacts();
   const editButton = state.editingId == contactId;
   return (
@@ -35,7 +36,7 @@ const AddButton = ({ contactId }) => {
       )}
     </>
   );
-};
+});
 
 AddButton.propTypes = {
   contactId: PropTypes.string.isRequired,
