@@ -4,11 +4,12 @@ import AddButton from "../../components/AddButton";
 import Grid from "@mui/material/Grid";
 import { addContact, updateContact, fetchContacts } from "../../api";
 import { useContacts } from "../../ContactContext";
+import PropTypes from "prop-types";
 
-const ContactForm = (contact) => {
+const ContactForm = ({ contact }) => {
   const { dispatch, state } = useContacts();
 
-  const currentData = contact?.contact || {};
+  const currentData = contact || {};
   const [firstName, setFirstName] = useState(currentData?.firstName || "");
   const [lastName, setLastName] = useState(currentData?.lastName || "");
   const [email, setEmail] = useState(currentData?.email || "");
@@ -136,5 +137,11 @@ const ContactForm = (contact) => {
     </form>
   );
 };
+ContactForm.propTypes = {
+  contact: PropTypes.object.isRequired,
+};
 
+ContactForm.defaultProps = {
+  contact: {},
+};
 export default ContactForm;

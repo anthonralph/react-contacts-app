@@ -1,10 +1,11 @@
 import Button from "@mui/material/Button";
 import SaveIcon from "@mui/icons-material/Save";
 import { useContacts } from "../ContactContext";
+import PropTypes from "prop-types";
 
-const AddButton = (props) => {
+const AddButton = ({ contactId }) => {
   const { state, dispatch } = useContacts();
-  const editButton = state.editingId == props.contactId;
+  const editButton = state.editingId == contactId;
   return (
     <>
       <Button
@@ -34,6 +35,14 @@ const AddButton = (props) => {
       )}
     </>
   );
+};
+
+AddButton.propTypes = {
+  contactId: PropTypes.string.isRequired,
+};
+
+AddButton.defaultProps = {
+  contactId: "None",
 };
 
 export default AddButton;
