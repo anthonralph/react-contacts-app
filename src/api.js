@@ -1,5 +1,5 @@
-const apiLink =
-  "https://crudcrud.com/api/081cdfb8a8db4ba6b45c625e5e9f15bb/contacts";
+let apiLink = "https://crudcrud.com/api/0ea2ae02d42c405395a87e1d0032bff8";
+apiLink = apiLink + "/contacts";
 
 export const fetchContacts = async () => {
   try {
@@ -57,7 +57,7 @@ export const updateContact = async (contact, contactId) => {
       body: JSON.stringify(contact),
     });
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(response.status);
     }
   } catch (error) {
     console.error("Error:", error);
