@@ -9,7 +9,7 @@ const initialState = {
   editingId: "",
   alert: {
     text: "",
-    type: "", //error, warning, info, success
+    type: "success", //error, warning, info, success
     show: false,
   },
 };

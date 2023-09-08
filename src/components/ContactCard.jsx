@@ -6,15 +6,14 @@ import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ContactForm from "../views/Forms/ContactForm";
-import { useState } from "react";
 import { useContacts } from "../ContactContext";
 
 const ContactCard = ({ contact, onDelete }) => {
   const { dispatch, state } = useContacts();
 
-  const [editing, setEditing] = useState(false);
-
   const editingId = state.editingId;
+
+  const loading = state.isLoading;
 
   return (
     <>
@@ -47,10 +46,11 @@ const ContactCard = ({ contact, onDelete }) => {
                     dispatch({ type: "SET_EDIT", payload: contact._id })
                   }
                   color="info"
+                  disabled={loading}
                 >
                   <EditIcon />
                 </IconButton>
-                <IconButton onClick={onDelete} color="error">
+                <IconButton disabled={loading} onClick={onDelete} color="error">
                   <DeleteIcon />
                 </IconButton>
               </Grid>
