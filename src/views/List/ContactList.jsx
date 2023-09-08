@@ -1,4 +1,5 @@
 import ContactCard from "../../components/ContactCard";
+import Loader from "../../components/Loader";
 import { deleteContact, fetchContacts } from "../../api";
 import { useContacts } from "../../ContactContext";
 
@@ -17,7 +18,8 @@ const ContactList = () => {
 
   return (
     <div>
-      {loading && <h1>Loading...</h1>}
+      {contacts ? <h3>Contacts</h3> : <h3>No Contacts</h3>}
+      {loading && <Loader />}
       {contacts?.map((contact, index) => (
         <ContactCard
           contact={contact}
