@@ -51,17 +51,26 @@ const ContactForm = (contact) => {
       email: email,
       mobileNumber: mobileNumber,
     };
+    dispatch({ type: "SET_LOADING" });
     const isToUpdate = Object.keys(currentData).length !== 0;
+    let action = "edited";
     if (isToUpdate) {
-      dispatch({ type: "SET_LOADING" });
       await updateContact(formData, currentData._id);
       dispatch({ type: "SET_EDIT", payload: "" });
     } else {
       await addContact(formData);
+      action = "added";
     }
     const newContacts = await fetchContacts();
-
     dispatch({ type: "SET_CONTACTS", payload: newContacts });
+    dispatch({
+      type: "SET_ALERT",
+      payload: {
+        text: `Contact ${formData.firstName} successfully ${action}!`,
+        show: true,
+        type: "success",
+      },
+    });
 
     setFirstName("");
     setLastName("");
@@ -121,7 +130,7 @@ const ContactForm = (contact) => {
           />
         </Grid>
         <Grid item xs={12}>
-          <AddButton type="submit" />
+          <AddButton />
         </Grid>
       </Grid>
     </form>
