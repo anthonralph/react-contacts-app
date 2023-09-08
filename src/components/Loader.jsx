@@ -9,7 +9,7 @@ export default function CircularIndeterminate() {
         align: "center",
         justifyContent: "center",
         alignItems: "center",
-        height: "20vh",
+        height: "10vh",
       }}
     >
       <CircularProgress />
