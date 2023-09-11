@@ -1,4 +1,4 @@
-let apiLink = "https://crudcrud.com/api/33f892b6b68b492a8423861ea094dadb";
+let apiLink = "https://crudcrud.com/api/120672b5a8634900850a99ca5bec000d";
 apiLink = apiLink + "/contacts";
 
 export const fetchContacts = async () => {
